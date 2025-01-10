@@ -1,0 +1,260 @@
+*, 
+*::before, 
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    margin-block: 0;
+    margin-inline: 0;
+
+    padding: 0;
+    padding-block: 0;
+    padding-inline: 0;
+    
+    /* transform style preserve 3d - its ugly, but best for transform animations */
+    transform-style: preserve-3d;
+    
+    user-select: none !important;
+}
+
+:root {
+    --color-light: 255,255,255;
+    --color-text: 25,25,25;
+    --color-dark: 0,0,0;
+
+    --text-alpha: 0.75;
+    --background-light-alpha: 0.15;
+    --background-dark-alpha: 0.75;
+
+    --background-color-dark: #2E3192;
+    --background-color-light: #1BFFFF;
+}
+
+body {
+    background: linear-gradient(50deg, var(--background-color-dark) 20%, var(--background-color-light));
+    font-family: Tahoma, Verdana, Geneva, sans-serif;
+
+    min-height: 100vh;
+    height: 100vh;
+    min-width: 100vw;
+
+    overflow-x: hidden !important;
+
+    width: 100vw;
+}
+
+/* Main page section */
+section {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    
+    min-height: 100vh;
+    height: 100vh;
+
+    place-content: center;
+    place-items: center;
+
+    min-width: 100vw;
+    width: 100vw;
+}
+@media screen and (max-width: 1200px) {
+    section {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        margin-top: 100px;
+        place-content: start;
+        row-gap: 25px;
+    }
+}
+
+.eventBoxElement::before {
+    content: attr(data-eventname);
+}
+.eventBoxElement {
+    align-items: center;
+    aspect-ratio: 1/1;
+    backdrop-filter: blur(50px);
+    background: linear-gradient(to right top, rgba(var(--color-light), var(--background-light-alpha)), rgba(var(--color-light), var(--background-dark-alpha)));
+    box-shadow: 0px 0px 10px 0px rgba(var(--color-dark), var(--background-light-alpha));
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    opacity: 0.9;
+    padding: 0 25px;
+    transition: all 0.3s ease-in-out;
+    width: 15vw;
+}
+.eventBoxElement:hover {
+    box-shadow: 0px 0px 20px 0px rgba(var(--color-dark), var(--background-light-alpha));
+    opacity: 1;
+}
+@media screen and (max-width: 1200px) {
+    .eventBoxElement {
+        padding: 0 5px;
+        width: 35vw;
+    }
+}
+
+.eventBoxElement::before,
+.eventInfoElement__eventInfo-span {
+    color: rgba(var(--color-text), var(--background-dark-alpha));
+    font-size: 1.1rem;
+    font-weight: bolder;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+}
+@media screen and (max-width: 1200px) {
+    .eventBoxElement::before {
+        font-size: 0.8rem;
+        word-break: break-all;
+    }
+}
+
+.eventInfoElement {
+    backdrop-filter: blur(50px);
+    background: linear-gradient(to right top, rgba(var(--color-light), var(--background-light-alpha)), rgba(var(--color-light), var(--background-dark-alpha)));
+    box-shadow: 0px 0px 10px 0px rgba(var(--color-dark), var(--background-light-alpha));
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%) rotateZ(0deg);
+}
+@media screen and (max-width: 1200px) {
+    .eventInfoElement {
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%) translateY(-110%) rotateZ(0deg);
+    }
+    .eventInfoElement__eventInfo-span {
+        font-size: 0.9rem;
+    }
+}
+@media screen and (max-width: 900px) {
+    .eventInfoElement__eventInfo-span {
+        font-size: 0.6rem;
+    }
+}
+
+/* Animation section */
+@keyframes rotateZ5deg {
+    0% {
+        transform: translateX(-50%) translateY(-50%) rotateZ(0deg);
+    }
+    1% {
+        transform: translateX(-50%) translateY(-50%) rotateZ(5deg);
+    }
+    2% {
+        transform: translateX(-50%) translateY(-50%) rotateZ(-5deg);
+    }
+    3% {
+        transform: translateX(-50%) translateY(-50%) rotateZ(0deg);
+    }
+    30% {
+        transform: translateX(-50%) translateY(-50%) rotateZ(0deg);
+    }
+    31% {
+        transform: translateX(-50%) translateY(-50%) rotateZ(5deg);
+    }
+    32% {
+        transform: translateX(-50%) translateY(-50%) rotateZ(-5deg);
+    }
+    33% {
+        transform: translateX(-50%) translateY(-50%) rotateZ(0deg);
+    }
+    64% {
+        transform: translateX(-50%) translateY(-50%) rotateZ(0deg);
+    }
+    65% {
+        transform: translateX(-50%) translateY(-50%) rotateZ(5deg);
+    }
+    66% {
+        transform: translateX(-50%) translateY(-50%) rotateZ(-5deg);
+    }
+    67% {
+        transform: translateX(-50%) translateY(-50%) rotateZ(0deg);
+    }
+    98% {
+        transform: translateX(-50%) translateY(-50%) rotateZ(0deg);
+    }
+}
+
+.eventInfoElement {
+    animation: rotateZ5deg 30s ease-in-out infinite;
+}
+@media screen and (max-width: 1200px) {
+    .eventInfoElement {
+        animation: none;
+    }
+}
+
+
+
+@keyframes moveDot1 {
+    from { transform: translateX(10vw) translateY(-35vh); }
+    to { transform: translateX(10vw) translateY(105vh);  }
+}
+
+@keyframes moveDot2 {
+    from { transform: translateX(50vw) translateY(-25vh); }
+    to { transform: translateX(50vw) translateY(105vh); }
+}
+
+@keyframes moveDot3 {
+    from { transform: translateX(70vw) translateY(-15vh); }
+    to { transform: translateX(70vw) translateY(105vh); }
+}
+
+.animationDotContainer {
+    min-height: 100vh;
+    height: 100vh;
+    
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    
+    min-width: 100vw;
+    width: 100vw;
+    z-index: -9999;
+}
+
+.dot {
+    aspect-ratio: 1/1;
+    background: linear-gradient(to right top, rgba(var(--color-light), var(--background-light-alpha)), rgba(var(--color-light), var(--background-dark-alpha)));
+    box-shadow: 0px 0px 10px 0px rgba(var(--color-dark), var(--background-light-alpha));
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.dot:nth-child(1) {
+    animation: moveDot1 60s infinite linear;
+    height: 30vh;
+    transform: translateX(10vw);
+}
+
+.dot:nth-child(2) {
+    animation: moveDot2 45s infinite linear;
+    height: 20vh;
+    transform: translateX(50vw);
+}
+
+.dot:nth-child(3) {
+    animation: moveDot3 25s infinite linear;
+    height: 10vh;
+    transform: translateX(70vw);
+}
+@media screen and (max-width: 1200px) {
+    .dot:nth-child(1),
+    .dot:nth-child(3) {
+        animation: none;
+        display: none;
+    }
+    .dot:nth-child(2) {
+        height: 15vh;
+        opacity: var(--background-dark-alpha);       
+    }
+}
+
+
